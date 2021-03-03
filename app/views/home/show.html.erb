@@ -1,0 +1,21 @@
+<h1>交租阶段信息</h1>
+<table>
+  <thead>
+  <tr>
+    <th>交租阶段开始结束日期</th>
+    <th>交租日</th>
+    <th>交租阶段总租金</th>
+    <th>是否生成账单</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @renting_phases.each do |obj| %>
+    <tr>
+      <td><%= "#{obj.begin_date} ～ #{obj.end_date}" %></td>
+      <td><%= obj.pay_date %></td>
+      <td><%= format_price obj.amount_count %></td>
+      <td><%= obj.invoice_status == RentingPhase::YES ? '是' : '否' %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

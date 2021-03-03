@@ -1,0 +1,60 @@
+<h1>Demo</h1>
+<%= link_to '创建', new_home_path %>
+
+<% if @contracts.any? %>
+  <h1>合同信息</h1>
+  <table>
+    <thead>
+    <tr>
+      <th>开始日期</th>
+      <th>结束日期</th>
+      <th>每月租金</th>
+      <th>交租周期</th>
+      <th>总租金</th>
+      <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+      <% @contracts.each do |obj| %>
+      <tr>
+        <td><%= obj.begin_date %></td>
+        <td><%= obj.end_date %></td>
+        <td><%= format_price obj.amount_month %></td>
+        <td><%= obj.cycle %></td>
+        <td><%= format_price obj.amount_count %></td>
+        <td>
+          <%= link_to "明细", home_path(obj) %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<% if @invoices.any? %>
+  <h1>以生成的账单</h1>
+  <table>
+    <thead>
+    <tr>
+      <th>开始日期</th>
+      <th>结束日期</th>
+      <th>交租日期</th>
+      <th>总租金</th>
+      <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @invoices.each do |obj| %>
+      <tr>
+        <td><%= obj.begin_date %></td>
+        <td><%= obj.end_date %></td>
+        <td><%= obj.pay_date %></td>
+        <td><%= format_price obj.amount_count %></td>
+        <td>
+          <%= link_to "明细", line_items_home_path(obj) %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% end %>

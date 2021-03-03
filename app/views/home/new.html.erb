@@ -1,0 +1,34 @@
+<h1>合同创建</h1>
+
+<% if @contract.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= "提交有如下 #{@contract.errors.count} 处错误" %></h2>
+
+    <ul>
+      <% @contract.errors.each do |attr| %>
+        <li><%= @contract.errors[attr][0] %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with url: home_index_path, model: @contract, local: true , class: 'table' do |f|%>
+  <div class="line">
+    用户名: <%= f.text_field :user_name %>
+  </div>
+  <div class="line">
+    开始日期: <%= f.date_field :begin_date %>
+  </div>
+  <div class="line">
+    结束日期: <%= f.date_field :end_date %>
+  </div>
+  <div class="line">
+    每月租金（元）: <%= f.number_field :price, min: 0.01, step: 0.01 %>
+  </div>
+  <div class="line">
+    交租周期（月）: <%= f.number_field :cycle, min: 1, max: 12, step: 1 %>
+  </div>
+  <div class="line">
+    <%= f.submit '确认提交' %>
+  </div>
+<% end %>

@@ -1,0 +1,23 @@
+<h1>账单明细</h1>
+<table>
+  <thead>
+  <tr>
+    <th>开始日期</th>
+    <th>结束日期</th>
+    <th>日期类型</th>
+    <th>单价</th>
+    <th>总价</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @line_items.each do |obj| %>
+    <tr>
+      <td><%= obj.begin_date %></td>
+      <td><%= obj.end_date %></td>
+      <td><%= obj.date_type == LineItem::DAYS ? '日' : '月' %></td>
+      <td><%= format_price obj.unit_price %></td>
+      <td><%= format_price obj.amount_count %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
