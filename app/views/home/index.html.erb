@@ -30,7 +30,12 @@
     </tbody>
   </table>
 <% end %>
-
+<br />
+<%= form_with url: auto_job_home_index_path, local: true , class: 'table' do |f|%>
+  <div class="line" style="width: 400px">
+   选择日期（用于生成报告）: <%= f.date_field :select_date %><%= f.submit '生成' %>
+  </div>
+<% end %>
 <% if @invoices.any? %>
   <h1>以生成的账单</h1>
   <table>

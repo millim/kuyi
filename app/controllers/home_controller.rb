@@ -16,6 +16,13 @@ class HomeController < ApplicationController
     @line_items = Invoice.find(params[:id]).line_items
   end
 
+  def auto_job
+    if params[:select_date].present?
+      Job.generate_invoice Date.parse(params[:select_date])
+    end
+    redirect_to home_index_path
+  end
+
   def create
     @contract = Contract.new(contract_params)
     return render :new unless @contract.save
